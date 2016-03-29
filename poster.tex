@@ -11,13 +11,15 @@
   {\bfseries}{}%
   {\newline}{}%
 \theoremstyle{break}
-\newtheorem*{Theorem}{Remark}
+\newtheorem*{Theorem}{Theorem}
 \newtheorem*{Definition}{Definition}
 
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{adjustbox}
 \usepackage{tikz}
+\usepackage[none]{hyphenat}
+
 \usetikzlibrary{automata,arrows,positioning}
 
 % Orange brand colours
@@ -32,16 +34,17 @@
 
 \usetikzlibrary{arrows.meta}
 \tikzset{>={Latex[width=4mm,length=4mm]}}
-\tikzstyle{switch-style}=[circle, draw, thin, fill=brand-func-blue, scale=0.3]
+\tikzstyle{switch-style}=[circle, draw, thin, fill=brand-blue, scale=0.3]
 \tikzstyle{controller-style}=[rectangle, thin, fill=brand-orange, scale=0.8]
 \tikzstyle{rpath}=[ultra thick, brand-orange, opacity=0.4]
 \tikzstyle{rounded-box}=[rectangle, rounded corners, draw=black, very thick, minimum height=2em, text centered]
 
-\title{Epidemic Control with Learning \& Optimization}
-\author{Paul Beaujean$^{\dagger *}$\\
-{\large \textbf{Advisors:} Prof. Cristina Bazgan$^{\dagger}$, \'Eric
-Gourdin$^{*}$}}
-\institute{$^{\dagger}$LAMSADE, Universit\'e Paris-Dauphine, $^{*}$Orange Labs}
+\title{{\bf Epidemic Control with Learning \& Optimization}}
+\author{{\bf Paul Beaujean$^{\dagger *}$\\
+{\Large \textbf{Advisors:} Prof. Cristina Bazgan$^{\dagger}$, \'Eric
+Gourdin$^{*}$}}}
+\institute{{\large
+$^{\dagger}$LAMSADE, Universit\'e Paris-Dauphine, $^{*}$Orange Labs}}
 \titlegraphic{
     \includegraphics[scale=0.4]{logo_dauphine}
         \qquad\qquad\qquad
@@ -52,9 +55,36 @@ Gourdin$^{*}$}}
 
 % Choose LAYOUT:  Default, Basic, Rays, Simple, Envelope, Wave, Board, Autumn, Desert,
 \usetheme{Autumn}
+\definecolorstyle{myColorStyle}{
+\colorlet{colorOne}{black}
+\colorlet{colorTwo}{white}
+\colorlet{colorThree}{brand-blue}
+}{
+% Background Colors
+\colorlet{backgroundcolor}{brand-blue}
+\colorlet{framecolor}{black}
+% Title Colors
+\colorlet{titlefgcolor}{brand-blue}
+\colorlet{titlebgcolor}{white}
+% Block Colors
+\colorlet{blocktitlebgcolor}{white}
+\colorlet{blocktitlefgcolor}{brand-blue}
+\colorlet{blockbodybgcolor}{white}
+\colorlet{blockbodyfgcolor}{black}
+% Innerblock Colors
+\colorlet{innerblocktitlebgcolor}{white}
+\colorlet{innerblocktitlefgcolor}{black}
+\colorlet{innerblockbodybgcolor}{white}
+\colorlet{innerblockbodyfgcolor}{black}
+% Note colors
+\colorlet{notefgcolor}{black}
+\colorlet{notebgcolor}{white}
+\colorlet{notefrcolor}{white}
+}
 %Default, Australia, Britain, Sweden, Spain, Russia, Denmark, Germany
 \usecolorstyle[colorOne=black, colorTwo=brand-blue,
-colorThree=brand-blue]{Germany}
+colorThree=brand-blue]{myColorStyle}
+\usetitlestyle[titletoblockverticalspace=10mm]{Filled}
 
 \begin{document}
 \maketitle{}
@@ -118,7 +148,7 @@ colorThree=brand-blue]{Germany}
         $G = (V, E)$.
     \item[Result:] The Markov process has $|\{S,I\}|^{|V|}$ states and the
         transition rates for a node depend on the state of its neighbours.
-        The model is parametrized by constants: $\beta$ and $\delta$.
+        The model parameters are $\beta$ and $\delta$.
       \end{description}
     \end{minipage}
     \qquad
@@ -178,7 +208,11 @@ colorThree=brand-blue]{Germany}
 
     \begin{Definition}[Spectral radius]
         The spectral radius of a graph is the largest eigenvalue of its
-        adjacency matrix.
+        adjacency matrix and satisfies:
+        \begin{equation*}
+            \frac{1}{n} \sum_{v\in V} \deg_G(v) \leq \lambda_{\max}(G) \leq
+            \max_{v\in V} \deg_G(v).
+        \end{equation*}
     \end{Definition}
 	\begin{Theorem}[Ganesh et al., 2005]
 	  Given a SIS epidemic with parameters $\beta$ and $\delta$ on a graph $G$:
@@ -219,10 +253,10 @@ colorThree=brand-blue]{Germany}
           \node[align=center] at (-3, 3) {One Class\\SVM};
     \coordinate (middle-SV) at (2.5, 2.5);
 
-	\draw [green, thick, shorten >= -0.5cm, shorten <= -0.5cm] (SV1)--(SV2);
+	\draw [brand-orange, thick, shorten >= -0.5cm, shorten <= -0.5cm] (SV1)--(SV2);
     \draw [->, black] (O)--(middle-SV) node [midway, above, sloped] {$w$};
-	\fill[red] (SV1) circle (3pt);
-	\fill[red] (SV2) circle (3pt);
+	\fill[brand-orange] (SV1) circle (3pt);
+	\fill[brand-orange] (SV2) circle (3pt);
 
     \coordinate (+1) at (2.3,5.3);
     \coordinate (+2) at (3.5,3);
@@ -235,16 +269,16 @@ colorThree=brand-blue]{Germany}
     \coordinate (+9) at (5, 0.5);
     \coordinate (+10) at (1.5,4.1);
 
-    \fill[blue] (+1) circle (3pt);
-    \fill[blue] (+2) circle (3pt);
-    \fill[blue] (+3) circle (3pt);
-    \fill[blue] (+4) circle (3pt);
-    \fill[blue] (+5) circle (3pt);
-    \fill[blue] (+6) circle (3pt);
-    \fill[blue] (+7) circle (3pt);
-    \fill[blue] (+8) circle (3pt);
-    \fill[blue] (+9) circle (3pt);
-    \fill[blue] (+10) circle (3pt);
+    \fill[brand-blue] (+1) circle (3pt);
+    \fill[brand-blue] (+2) circle (3pt);
+    \fill[brand-blue] (+3) circle (3pt);
+    \fill[brand-blue] (+4) circle (3pt);
+    \fill[brand-blue] (+5) circle (3pt);
+    \fill[brand-blue] (+6) circle (3pt);
+    \fill[brand-blue] (+7) circle (3pt);
+    \fill[brand-blue] (+8) circle (3pt);
+    \fill[brand-blue] (+9) circle (3pt);
+    \fill[brand-blue] (+10) circle (3pt);
 	  
 	\end{tikzpicture}
     \end{tikzfigure}
@@ -252,8 +286,7 @@ colorThree=brand-blue]{Germany}
   \begin{minipage}[t]{0.2\textwidth}
       \subsection*{Parameter estimation}
       \begin{description}
-          \item[Input:] Observations of the health status of a node at a
-              given time.
+          \item[Input:] Time series of node health data.
         \item[Model:] SIS model with unknown parameters $\beta$ and
             $\delta$.
         \item[Estimate:] $\beta$ and $\delta$.
@@ -261,21 +294,7 @@ colorThree=brand-blue]{Germany}
   \end{minipage}
 }
 
-\block{Finding a secure subgraph: a NP-hard endeavour}{
-    \begin{minipage}[t]{0.25\textwidth}
-        \subsection*{Mathematical program}
-    \begin{equation*}
-      \begin{split}
-	\max & \sum_{e \in E} x_e\\
-      & A(x) \preceq \delta / \beta I\\
-	  & x \in \{0,1\}^m
-      \end{split}
-    \end{equation*}
-    0-1 SDP can be solved by branch \& bound.
-        
-    We look instead for approximation algorithms.
-  \end{minipage}
-  \quad
+\block{Approximation algorithms for the secure subgraph problem}{
   \begin{minipage}[t]{0.23\textwidth}
       \subsection*{Closed walks}
       \begin{itemize}
@@ -284,24 +303,41 @@ colorThree=brand-blue]{Germany}
                 \lambda_{\max}(A) = O(||A||_{\log n}).
               \end{equation*}
           \item[$\circ$] The number of closed walks of length $k$ is $||A||_k^k$.
-          \item[$\circ$] Find subgraph with few closed walks of length $\log n$.
+          \item Find subgraph with few closed walks of length $\log n$.
       \end{itemize}
   \end{minipage}
   \quad
-  \begin{minipage}[t]{0.2\textwidth}
+    \begin{minipage}[t]{0.2\textwidth}
+        \subsection*{Mathematical program}
+    \begin{equation*}
+      \begin{split}
+          &\max \sum_{e \in E} x_e\\
+          &\sum_{e\in E} x_e A_e \preceq \delta / \beta I\\
+          &x \in \{0,1\}^m
+      \end{split}
+    \end{equation*}
+        \begin{itemize}
+            \item[$\circ$] $A_e$ is the adjacency matrix of edge $e$.
+        \end{itemize}
+  \end{minipage}
+  \quad
+  \begin{minipage}[t]{0.23\textwidth}
       \subsection*{SDP and random matrices}
       \begin{itemize}
-          \item[$\circ$] Relaxation of the mathematical program is a SDP.
+          \item[$\circ$] Continuous relaxation of the mathematical program
+              gives a SDP.
           \item[$\circ$] Optimal solution $x^*$ used as a distribution.
-          \item[$\circ$] Leverage concentration of measure for symmetric random matrices.
+          \item Leverage concentration of measure for symmetric random matrices.
       \end{itemize}
   \end{minipage}
-  \begin{minipage}[t]{0.2\textwidth}
+  \quad
+  \begin{minipage}[t]{0.23\textwidth}
       \subsection*{Interlacing polynomials}
       \begin{itemize}
-          \item[$\circ$] Study characteristic polynomial $det(tI - A)$ of the graph.
-          \item[$\circ$] Undirected graphs have real roots: a rare property?
-          \item[$\circ$] Combinatorial polynomials are often real-stable.
+          \item[$\circ$] Polynomial-valued r.v.s related to the
+              characteristic polynomial of a graph.
+          \item[$\circ$] Undirected graphs have real roots: is it a rare property?
+          \item Bounding the spectral radius by bounding roots.
       \end{itemize}
   \end{minipage}
 }
